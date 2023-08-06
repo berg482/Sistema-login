@@ -10,7 +10,7 @@ class LoginController extends Controller {
         
     }
 
-    public function signin(){
+    public function logar(){
         $flash = '';
         if(!empty($_SESSION['flash'])){ //se está preenchido 
             $flash = $_SESSION['flash']; //salva mensagem
@@ -21,7 +21,7 @@ class LoginController extends Controller {
         ]);//criar view login
     }
 
-    public function signinAction() {
+    public function acaologar() {
        //filtrar e receber os dados
        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
        $password = filter_input(INPUT_POST, 'password' );
@@ -43,9 +43,6 @@ class LoginController extends Controller {
        }
     }
 
-    public function signup(){
-        echo 'cadastro';
-    }
 
    
 

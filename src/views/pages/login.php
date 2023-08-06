@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Login</title>
+    <title>Login MKT</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
     <link rel="stylesheet" href="<?=$base;?>/assets/css/login.css" />
 </head>
@@ -25,7 +25,6 @@
 
             <input class="button" type="submit" value="Acessar o sistema" />
 
-            <a href="<?=$base;?>/cadastro">Ainda não tem conta? Cadastre-se</a>
         </form>
     </section>
 </body>

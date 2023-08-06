@@ -2,11 +2,11 @@
 namespace src;
 
 class Config {
-    const BASE_DIR = '/devsmvc/public';
+    const BASE_DIR = '/mvc/public';
 
     const DB_DRIVER = 'mysql';
     const DB_HOST = 'localhost';
-    const DB_DATABASE = 'devsbook';
+    const DB_DATABASE = 'marktclub';
     CONST DB_USER = 'root';
     const DB_PASS = '';
 

@@ -4,6 +4,7 @@ use core\Router;
 $router = new Router();
 
 $router->get('/', 'HomeController@index');
-$router->get('/login', 'LoginController@signin');
-$router->post('/login', 'LoginController@signinAction');//rota para receber dados com metodo post 
-$router->get('/cadastro', 'LoginController@signup');
+$router->get('/login', 'LoginController@logar');
+$router->post('/login', 'LoginController@acaologar');//rota para receber dados com metodo post 
+$router->get('/formulario', 'HomeController@formulario');
+$router->post('/formulario', 'HomeController@acaoformulario');

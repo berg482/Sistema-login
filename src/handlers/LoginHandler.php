@@ -1,6 +1,6 @@
 <?php
 namespace src\handlers;
-use \src\models\User;
+use \src\models\usuario;
 
 class LoginHandler {// classe especifica para verificar login
     
@@ -8,29 +8,29 @@ class LoginHandler {// classe especifica para verificar login
         if(!empty($_SESSION['token'])){//se existir e não estiver vazia
             $token = $_SESSION['token']; //pegar token
 
-            $data = User::select()->where('token', $token)->one();//verificação
+            $data = usuario::select()->where('token', $token)->one();//verificação
             if(count($data) > 0){
 
-                $loggedUser = new User();//instancia, montando classe de usuário
-                $loggedUser->id = $data['id'];
-                $loggedUser->email = $data['email']; 
-                $loggedUser->name = $data['name'];
+                $usuariologado = new usuario();//instancia, montando classe de usuário
+                $usuariologado->id = $data['id'];
+                $usuariologado->email = $data['email']; 
+                $usuariologado->name = $data['nome'];
 
-                return $loggedUser;
+                return $usuariologado;
             }
 
         }
         return false;
     }
 
-    public static function verifyLogin($email, $password){
-        $user = User::select()->where('email', $email)->one(); //buscar usuario no banco 
+    public static function verifyLogin($email, $senha){
+        $user = usuario::select()->where('email', $email)->one(); //buscar usuario no banco 
         
         if($user){
-            if(password_verify($password, $user['password'])){ //função verificar senha com hash
+            if(password_verify($senha, $user['senha'])){ //função verificar senha com hash
                 $token = md5(time().rand(0,9999999)); //gerar token
                 
-                User::update()              //Alterar no usuario, salvar token
+                usuario::update()              //Alterar no usuario, salvar token
                     ->set('token', $token)
                     ->where('email', $email)
                 ->execute(); 
