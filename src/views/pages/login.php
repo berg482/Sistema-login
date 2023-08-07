@@ -23,7 +23,7 @@
 
             <input placeholder="Digite sua senha" class="input" type="password" name="password" />
 
-            <input class="button" type="submit" value="Acessar o sistema" />
+            <input class="button" type="submit" value="Acessar" />
 
         </form>
     </section>

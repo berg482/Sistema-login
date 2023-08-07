@@ -20,7 +20,10 @@ class HomeController extends Controller {
     }
 
     public function index() {
-        $this->render('home',);
+        $usuarios = usuario::select()->execute(); //pegar todos usuarios 
+        $this->render('home', [
+            'usuarios' => $usuarios //array usuarios mandando lista $usuarios para view
+        ]);
     }
 
     public function formulario(){
@@ -42,14 +45,45 @@ class HomeController extends Controller {
                     'email' => $email,
                     'senha' => $senha
                 ])->execute();
-                echo'Inserido com sucesso';
-                exit;
+                $this->redirect('/');
             }
             
         }
-        echo'Falha ao enserir';
-        //$this->redirect('/formulario');
+        $this->redirect('/formulario');
     }
+
+    public function editar($args){
+        $usuario = usuario::select()->find($args['id']);
+        
+        $this->render('editar',[
+            'usuario' => $usuario
+        ]);
+    }
+
+    public function acaoeditar($args){
+        $nome = filter_input(INPUT_POST, 'nome');
+        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+        $cpf = filter_input(INPUT_POST, 'cpf' );
+
+        if($nome && $email && $cpf){
+            //requisição
+            usuario::update()
+                ->set('nome', $nome)
+                ->set('email', $email)
+                ->where('id', $args['id'])
+            ->execute();
+            
+            $this->redirect('/');
+        }
+
+        $this->redirect('/usuario/'.$args['id'].'/editar');
+    }
+
+    //public function excluir(){
+        //echo 'excluir';
+    //}
+
+
 
 
 }

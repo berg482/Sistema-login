@@ -1,66 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Login MKT</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
+    <link rel="stylesheet" href="<?=$base;?>/assets/css/login.css" />
+</head>
 <body>
-    <div id="site">
-        <header>
-            <a class="voltar" href="index.php"><img src="images/voltar.svg"></a>
-            <h1 class="total">Salvar novo usuário</h1>
-            <figure></figure>
-            <a class="sair" href="login.php">sair</a>
-        </header>
-        <form action="" class="cadastro">
-            <div class="input">
-                <label for="input_nome">Nome:</label>
-                <input type="text" id="input_nome" name="nome" placeholder="Digite um nome">
-            </div>
-            <div class="input">
-                <label for="input_cpf">CPF:</label>
-                <input type="text" id="input_cpf" name="cpf" placeholder="Digite um CPF">
-            </div>
-            <div class="input">
-                <label for="input_email">E-mail:</label>
-                <input type="text" id="input_email" name="email" placeholder="Digite um e-mail">
-            </div>
-            <div class="input">
-                <label for="input_senha">Senha:</label>
-                <input type="password" id="input_senha" name="senha" placeholder="Digite uma senha">
-            </div>
+    <header>
+        <div class="container">
+            <a href=""><img src="<?=$base;?>/assets/images/devsbook_logo.png" /></a>
+        </div>
+    </header>
+    <section class="container main">  
+        <table border="1" width="100%">
+            <tr>
+                <th>Nome:</th>
+                <th>E-mail</th>
+                <th>CPF</th>
+                <th>Ações</th>
+            </tr>
+            <?php foreach($usuarios as $usuario): ?>
+                <tr>
+                    <th><?= $usuario['nome']; ?></th>
+                    <th><?= $usuario['email']; ?></th>
+                    <th><?= $usuario['cpf']; ?></th>
+                    <td>
+                        <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/editar">Editar</a>
+                        <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/excluir">Excluir</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
 
-            <div class="select">
-                <label for="input_status">Status</label>
-                <select name="status" id="input_status">
-                    <option value="">Escolha uma opção</option>
-                    <option value="ativo">Ativo</option>
-                    <option value="inativo">Inativo</option>
-                </select>
-                <div class="seta"><img src="images/seta.svg" alt=""></div>
-            </div>
-
-            <h2>Permissão</h2>
-            <div class="permissao">
-                <div class="checkbox">
-                    <input type="checkbox" id="input_permissao_login" name="permissao[]" value="login">
-                    <div class="check"><img src="images/check.svg"></div>
-                    <label for="input_permissao_login">Login</label>
-                </div>
-                <div class="checkbox">
-                    <input type="checkbox" id="input_permissao_usuario_add" name="permissao[]" value="usuario_add">
-                    <div class="check"><img src="images/check.svg"></div>
-                    <label for="input_permissao_usuario_add">Add usuário</label>
-                </div>
-                <div class="checkbox">
-                    <input type="checkbox" id="input_permissao_usuario_editar" name="permissao[]" value="usuario_editar">
-                    <div class="check"><img src="images/check.svg"></div>
-                    <label for="input_permissao_usuario_editar">Editar usuário</label>
-                </div>
-                <div class="checkbox">
-                    <input type="checkbox" id="input_permissao_usuario_deletar" name="permissao[]" value="usuario_deletar">
-                    <div class="check"><img src="images/check.svg"></div>
-                    <label for="input_permissao_usuario_deletar">Deletar usuário</label>
-                </div>
-            </div>
-
-            <button>SALVAR</button>
-        </form>
-    </div>
+        </table>
+    </section>
 </body>
-
 </html>
