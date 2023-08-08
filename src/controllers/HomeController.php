@@ -34,8 +34,9 @@ class HomeController extends Controller {
         $nome = filter_input(INPUT_POST, 'nome');
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $senha = filter_input(INPUT_POST, 'senha' );
+        $cpf = filter_input(INPUT_POST, 'cpf');
 
-        if($nome && $email && $senha){
+        if($nome && $email && $senha && $cpf){
 
             $data = usuario::select()->where('email', $email)->execute();
             
@@ -43,7 +44,8 @@ class HomeController extends Controller {
                 usuario::insert([
                     'nome' => $nome,
                     'email' => $email,
-                    'senha' => $senha
+                    'senha' => $senha,
+                    'cpf' => $cpf
                 ])->execute();
                 $this->redirect('/');
             }
@@ -70,6 +72,7 @@ class HomeController extends Controller {
             usuario::update()
                 ->set('nome', $nome)
                 ->set('email', $email)
+                ->set('cpf', $cpf)
                 ->where('id', $args['id'])
             ->execute();
             
@@ -79,9 +82,12 @@ class HomeController extends Controller {
         $this->redirect('/usuario/'.$args['id'].'/editar');
     }
 
-    //public function excluir(){
-        //echo 'excluir';
-    //}
+    public function excluir($args){
+        echo 'excluindo';
+        usuario::delete()
+            ->where('id', $args['id'])->execute();
+        $this->redirect('/');
+    }
 
 
 

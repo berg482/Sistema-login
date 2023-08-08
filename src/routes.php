@@ -14,4 +14,4 @@ $router->post('/formulario', 'HomeController@acaoformulario');
 $router->get('/usuario/{id}/editar', 'HomeController@editar');//pegar info
 $router->post('/usuario/{id}/editar', 'HomeController@acaoeditar');//enviar info
 
-//$router->get('/usuario/{id}/excluir', 'HomeController@excluir');
+$router->get('/usuario/{id}/excluir', 'HomeController@excluir');

@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="container">
-            <a href=""><img src="<?=$base;?>/assets/images/devsbook_logo.png" /></a>
+            <a href=""><img src="<?=$base;?>/assets/images/logo.png" /></a>
         </div>
     </header>
     <section class="container main">  
@@ -27,13 +27,17 @@
                     <th><?= $usuario['email']; ?></th>
                     <th><?= $usuario['cpf']; ?></th>
                     <td>
-                        <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/editar">Editar</a>
-                        <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/excluir">Excluir</a>
+                        <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/editar">
+                            <img src="<?=$base;?>/assets/images/editar.svg" alt"" />
+                        </a>
+                        <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/excluir" onclick="return confirm('Tem certeza que deseja excluir?')">
+                            <img src="<?=$base;?>/assets/images/deletar.svg" alt"" />
+                        </a>
                     </td>
                 </tr>
             <?php endforeach; ?>
-
         </table>
     </section>
+    <a href="<?=$base?>/formulario">Criar usuário</a>
 </body>
 </html>

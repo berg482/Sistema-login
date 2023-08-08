@@ -9,7 +9,7 @@
 <body>
     <header>
         <div class="container">
-            <a href=""><img src="<?=$base;?>/assets/images/devsbook_logo.png" /></a>
+            <a href=""><img src="<?=$base;?>/assets/images/logo.png" /></a>
         </div>
     </header>
     <section class="container main">  
@@ -50,7 +50,7 @@
             </div>
 
             <input class="button" type="submit" value="Salvar" />
-            <a href="<?=$base;?>/formulario" class="button">Sair</a>
+            <a href="<?=$base;?>/" class="button">Sair</a>
         </form>
     </section>
 </body>
