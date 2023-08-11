@@ -1,20 +1,30 @@
 <?php
 namespace src\handlers;
 use \src\models\usuario;
+//error_reporting(E_ALL);
+ini_set("display_errors", 1);
+include("file_with_errors.php");
 
 class LoginHandler {// classe especifica para verificar login
     
     public static function checkLogin(){
         if(!empty($_SESSION['token'])){//se existir e não estiver vazia
             $token = $_SESSION['token']; //pegar token
-
-            $data = usuario::select()->where('token', $token)->one();//verificação
-            if(count($data) > 0){
+            //var_dump($token);
+            $data = usuario::select()->where('token', $token)->execute();//verificação
+            var_dump($data);
+            if(is_array($data)){
+                $cont = count($data);
+            }else{
+                $cont = 0;
+            }
+            var_dump($cont);
+            if($cont > 0){
 
                 $usuariologado = new usuario();//instancia, montando classe de usuário
                 $usuariologado->id = $data['id'];
-                $usuariologado->email = $data['email']; 
-                $usuariologado->name = $data['nome'];
+                $usuariologado->email = $data['email'];
+                $usuariologado->nome = $data['nome'];
 
                 return $usuariologado;
             }
@@ -23,21 +33,48 @@ class LoginHandler {// classe especifica para verificar login
         return false;
     }
 
-    public static function verifyLogin($email, $senha){
+    public static function verifyLogin($email, $password){
         $user = usuario::select()->where('email', $email)->one(); //buscar usuario no banco 
         
         if($user){
-            if(password_verify($senha, $user['senha'])){ //função verificar senha com hash
+            if(password_verify($password, $user['senha'])){ //função verificar senha com hash
                 $token = md5(time().rand(0,9999999)); //gerar token
                 
-                usuario::update()              //Alterar no usuario, salvar token
-                    ->set('token', $token)
-                    ->where('email', $email)
-                ->execute(); 
+                usuario::insert([//update             //Alterar no usuario, salvar token
+                    //->set('token', $token)
+                    //->where('email', $email)
+                    'token' => $token
+                    ])->execute();
                 
                 return $token; 
             }
         }
         return false;
     }
+
+    public static function existeEmail($email){
+        $user = usuario::select()->where('email', $email)->one();
+        return $user ? true : false; 
+    }
+
+    public static function adicionarUsuario($nome, $email, $senha, $cpf){
+        $hash = password_hash($senha, PASSWORD_DEFAULT);
+        //$token = md5(time().rand(0,9999999));
+
+        usuario::insert([
+            'nome' => $nome,
+            'email' => $email,
+            'senha' => $hash,
+            'cpf' => $cpf,
+            //'token' => $token
+        ])->execute();
+
+        //return $token;
+
+    }
+
+    //verificar email existe
+
+    //adicionar usuario
+
 }

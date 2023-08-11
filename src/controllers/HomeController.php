@@ -10,13 +10,13 @@ class HomeController extends Controller {
 
     private $usuariologado; //receber usuario logado
 
-    public function __construct()
-    {   //preencher usuariologado instancia de usuario
-        $this->usuariologado = LoginHandler::checkLogin(); 
-        if($this->usuariologado === false){
+    public function __construct(){   //preencher usuariologado instancia de usuario
+        //$this->usuariologado = LoginHandler::checkLogin();
+        //var_dump($this->usuariologado);
+        //if($this->usuariologado === false){
             //$this->redirect('/login');
-        }
-       
+        //}
+        
     }
 
     public function index() {
@@ -38,20 +38,33 @@ class HomeController extends Controller {
 
         if($nome && $email && $senha && $cpf){
 
-            $data = usuario::select()->where('email', $email)->execute();
+            //$data = usuario::select()->where('email', $email)->execute();
             
-            if(count($data) === 0){ //se não existir
-                usuario::insert([
-                    'nome' => $nome,
-                    'email' => $email,
-                    'senha' => $senha,
-                    'cpf' => $cpf
-                ])->execute();
-                $this->redirect('/');
-            }
+            //if(count($data) === 0){ //se não existir
+                //usuario::insert([
+                    //'nome' => $nome,
+                    //'email' => $email,
+                    //'senha' => $senha,
+                    //'cpf' => $cpf
+                //])->execute();
+                //$this->redirect('/');
+
+                if(LoginHandler::existeEmail($email) === false){
+
+                    LoginHandler::adicionarUsuario($nome, $email, $senha, $cpf);
+                    //$_SESSION['token'] = $token;
+                    $this->redirect('/');
+                }else{
+                    $_SESSION['flash'] = 'E-mail já cadastrado';
+                    $this->redirect('/formulario');
+                }
+
+            //}
             
+        }else{
+            $this->redirect('/');
         }
-        $this->redirect('/formulario');
+        
     }
 
     public function editar($args){
@@ -73,6 +86,7 @@ class HomeController extends Controller {
                 ->set('nome', $nome)
                 ->set('email', $email)
                 ->set('cpf', $cpf)
+                //editar senha com hash novo 
                 ->where('id', $args['id'])
             ->execute();
             

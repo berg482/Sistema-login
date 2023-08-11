@@ -5,10 +5,10 @@ use \core\Controller;
 use \src\handlers\LoginHandler;
 class LoginController extends Controller {
 
-    public function __construct()
-    {
+    //public function __construct()
+    //{
         
-    }
+    //}
 
     public function logar(){
         $flash = '';
@@ -29,6 +29,7 @@ class LoginController extends Controller {
        if($email && $password){
 
             $token = LoginHandler::verifyLogin($email, $password); // função verificar senha
+            var_dump($token);
             if($token){
                 $_SESSION['token'] = $token;//armazenar token na sessao
                 $this->redirect('/');//página inicial
