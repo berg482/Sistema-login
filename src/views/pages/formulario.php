@@ -29,11 +29,7 @@
 
             <h2>Permissão</h2>
             <div class="permissao">
-                <div class="checkbox">
-                    <input type="checkbox" id="input_permissao_login" name="permissao[]" value="login">
-                    
-                    <label for="input_permissao_login">Login</label>
-                </div>
+               
                 <div class="checkbox">
                     <input type="checkbox" id="input_permissao_usuario_add" name="permissao[]" value="usuario_add">
                     
