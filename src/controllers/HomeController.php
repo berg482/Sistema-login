@@ -4,6 +4,7 @@ namespace src\controllers;
 use \src\models\usuario;
 use \core\Controller; //liberar uso 
 use \src\handlers\LoginHandler;
+
 //use src\handlers\LoginHandler as HandlersLoginHandler;
 
 class HomeController extends Controller {
@@ -11,12 +12,11 @@ class HomeController extends Controller {
     private $usuariologado; //receber usuario logado
 
     public function __construct(){   //preencher usuariologado instancia de usuario
-        //$this->usuariologado = LoginHandler::checkLogin();
-        //var_dump($this->usuariologado);
-        //if($this->usuariologado === false){
-            //$this->redirect('/login');
-        //}
-        
+        $this->usuariologado = LoginHandler::checkLogin();
+        var_dump($this->usuariologado);
+        if($this->usuariologado === false){
+            $this->redirect('/login');
+        }
     }
 
     public function index() {
@@ -53,7 +53,7 @@ class HomeController extends Controller {
 
                     LoginHandler::adicionarUsuario($nome, $email, $senha, $cpf);
                     //$_SESSION['token'] = $token;
-                    $this->redirect('/');
+                    //$this->redirect('/');
                 }else{
                     $_SESSION['flash'] = 'E-mail já cadastrado';
                     $this->redirect('/formulario');

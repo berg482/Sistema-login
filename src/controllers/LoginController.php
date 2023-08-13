@@ -3,6 +3,8 @@ namespace src\controllers;
 
 use \core\Controller;
 use \src\handlers\LoginHandler;
+//ini_set("display_errors", 1);
+//include("file_with_errors.php");
 class LoginController extends Controller {
 
     //public function __construct()
@@ -27,17 +29,17 @@ class LoginController extends Controller {
        $password = filter_input(INPUT_POST, 'password' );
        //verificar dados
        if($email && $password){
-
             $token = LoginHandler::verifyLogin($email, $password); // função verificar senha
             var_dump($token);
             if($token){
                 $_SESSION['token'] = $token;//armazenar token na sessao
-                $this->redirect('/');//página inicial
+                //$this->redirect('/');//página inicial
+
+                $this->redirect('/');
             }else{
                 $_SESSION['flash'] = 'email e/ou senha não conferem';
                 $this->redirect('/login');
-            }
-            
+            } 
        }else{
         $_SESSION['flash'] = 'Digite os campos corretamente';
         $this->redirect('/login');

@@ -3,34 +3,36 @@ namespace src\handlers;
 use \src\models\usuario;
 //error_reporting(E_ALL);
 ini_set("display_errors", 1);
-include("file_with_errors.php");
+//include("file_with_errors.php");
 
 class LoginHandler {// classe especifica para verificar login
     
     public static function checkLogin(){
         if(!empty($_SESSION['token'])){//se existir e não estiver vazia
+
             $token = $_SESSION['token']; //pegar token
             //var_dump($token);
             $data = usuario::select()->where('token', $token)->execute();//verificação
-            var_dump($data);
+            //var_dump($data);
             if(is_array($data)){
                 $cont = count($data);
             }else{
                 $cont = 0;
             }
-            var_dump($cont);
+            //var_dump($cont);
             if($cont > 0){
 
-                $usuariologado = new usuario();//instancia, montando classe de usuário
-                $usuariologado->id = $data['id'];
-                $usuariologado->email = $data['email'];
-                $usuariologado->nome = $data['nome'];
-
-                return $usuariologado;
+                //$usuariologado = new usuario();//instancia, montando classe de usuário
+                //$usuariologado->id = $data['id'];
+                //$usuariologado->email = $data['email'];
+                //$usuariologado->nome = $data['nome'];
+                return true;//$usuariologado;
             }
-
+    
+        }else{
+            return false;
         }
-        return false;
+        
     }
 
     public static function verifyLogin($email, $password){
@@ -40,11 +42,11 @@ class LoginHandler {// classe especifica para verificar login
             if(password_verify($password, $user['senha'])){ //função verificar senha com hash
                 $token = md5(time().rand(0,9999999)); //gerar token
                 
-                usuario::insert([//update             //Alterar no usuario, salvar token
-                    //->set('token', $token)
-                    //->where('email', $email)
-                    'token' => $token
-                    ])->execute();
+                usuario::update()//update             //Alterar no usuario, salvar token
+                    ->set('token', $token)
+                    ->where('email', $email)
+                    //'token' => $token
+                    ->execute();
                 
                 return $token; 
             }
