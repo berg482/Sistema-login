@@ -1,3 +1,9 @@
+<?php
+if(isset($_POST[('submit')]))
+{ //se existir variavel
+    print_r('Permissão: '.$_POST['permissao']);
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,24 +36,24 @@
             <h2>Permissão</h2>
             <div class="permissao">
                
-                <div class="checkbox">
-                    <input type="checkbox" id="input_permissao_usuario_add" name="permissao[]" value="usuario_add">
-                    
-                    <label for="input_permissao_usuario_add">Add usuário</label>
+                <div class="radio">
+                    <input type="radio" id="input_permissao_usuario_comum" name="permissao" value="comum">
+                    <label for="input_permissao_usuario_comum">Comum</label>
                 </div>
-                <div class="checkbox">
-                    <input type="checkbox" id="input_permissao_usuario_editar" name="permissao[]" value="usuario_editar">
-                    
-                    <label for="input_permissao_usuario_editar">Editar usuário</label>
+
+                <div class="radio">
+                    <input type="radio" id="input_permissao_usuario_gerente" name="permissao" value="gerente">
+                    <label for="input_permissao_usuario_gerente">Gerente</label>
                 </div>
-                <div class="checkbox">
-                    <input type="checkbox" id="input_permissao_usuario_deletar" name="permissao[]" value="usuario_deletar">
-                    
-                    <label for="input_permissao_usuario_deletar">Deletar usuário</label>
+
+                <div class="radio">
+                    <input type="radio" id="input_permissao_usuario_administrador" name="permissao" value="administrador">    
+                    <label for="input_permissao_usuario_input_permissao_usuario_administrador">Administrador</label>
                 </div>
+
             </div>
 
-            <input class="button" type="submit" value="Salvar" />
+            <input class="button" type="submit" nome="submit" value="Salvar" />
             <a href="<?=$base;?>/login" class="button">Sair</a>
         </form>
     </section>

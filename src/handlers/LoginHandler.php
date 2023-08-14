@@ -59,7 +59,7 @@ class LoginHandler {// classe especifica para verificar login
         return $user ? true : false; 
     }
 
-    public static function adicionarUsuario($nome, $email, $senha, $cpf){
+    public static function adicionarUsuario($nome, $email, $senha, $cpf, $permissao){
         $hash = password_hash($senha, PASSWORD_DEFAULT);
         //$token = md5(time().rand(0,9999999));
 
@@ -68,15 +68,9 @@ class LoginHandler {// classe especifica para verificar login
             'email' => $email,
             'senha' => $hash,
             'cpf' => $cpf,
-            //'token' => $token
+            'permissao' => $permissao
         ])->execute();
 
-        //return $token;
-
     }
-
-    //verificar email existe
-
-    //adicionar usuario
 
 }

@@ -35,8 +35,9 @@ class HomeController extends Controller {
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $senha = filter_input(INPUT_POST, 'senha' );
         $cpf = filter_input(INPUT_POST, 'cpf');
+        $permissao = filter_input(INPUT_POST, 'permissao');
 
-        if($nome && $email && $senha && $cpf){
+        if($nome && $email && $senha && $cpf && $permissao ){
 
             //$data = usuario::select()->where('email', $email)->execute();
             
@@ -51,9 +52,9 @@ class HomeController extends Controller {
 
                 if(LoginHandler::existeEmail($email) === false){
 
-                    LoginHandler::adicionarUsuario($nome, $email, $senha, $cpf);
+                    LoginHandler::adicionarUsuario($nome, $email, $senha, $cpf, $permissao );
                     //$_SESSION['token'] = $token;
-                    //$this->redirect('/');
+                    $this->redirect('/');
                 }else{
                     $_SESSION['flash'] = 'E-mail já cadastrado';
                     $this->redirect('/formulario');
@@ -76,17 +77,19 @@ class HomeController extends Controller {
     }
 
     public function acaoeditar($args){
+
         $nome = filter_input(INPUT_POST, 'nome');
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $cpf = filter_input(INPUT_POST, 'cpf' );
+        $permissao = filter_input(INPUT_POST, 'permissao');
 
-        if($nome && $email && $cpf){
+        if($nome && $email && $cpf && $permissao){
             //requisição
             usuario::update()
                 ->set('nome', $nome)
                 ->set('email', $email)
                 ->set('cpf', $cpf)
-                //editar senha com hash novo 
+                ->set('permissao', $permissao)
                 ->where('id', $args['id'])
             ->execute();
             
@@ -97,14 +100,25 @@ class HomeController extends Controller {
     }
 
     public function excluir($args){
-        echo 'excluindo';
         usuario::delete()
             ->where('id', $args['id'])->execute();
         $this->redirect('/');
     }
 
 
+    public function permissaoeditar(){
 
+    }
+
+    public function permissaoExcluirUsuario($args){
+        //$acesso = usuario::select('permissao')
+            //->where('id', $args['id'])->execute();
+        
+        //if($acesso === 'administrador'){
+            //return true;
+        //}
+    //return false;
+    }
 
 }
 

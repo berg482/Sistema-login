@@ -1,4 +1,4 @@
-
+<php? use /src/controllers/HomeController; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,12 +27,16 @@
                     <th><?= $usuario['email']; ?></th>
                     <th><?= $usuario['cpf']; ?></th>
                     <td>
+                       
                         <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/editar">
                             <img src="<?=$base;?>/assets/images/editar.svg" alt"" />
                         </a>
-                        <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/excluir" onclick="return confirm('Tem certeza que deseja excluir?')">
-                            <img src="<?=$base;?>/assets/images/deletar.svg" alt"" />
-                        </a>
+
+                        <?php if (permissaoExcluirUsuario($usuario['id'])): ?>
+                            <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/excluir" onclick="return confirm('Tem certeza que deseja excluir?')">
+                                <img src="<?=$base;?>/assets/images/deletar.svg" alt"" />
+                            </a>
+                        <?php endif; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

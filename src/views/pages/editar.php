@@ -27,26 +27,22 @@
 
             <h2>Permissão</h2>
             <div class="permissao">
-                <div class="checkbox">
-                    <input type="checkbox" id="input_permissao_login" name="permissao[]" value="login">
-                    
-                    <label for="input_permissao_login">Login</label>
+                
+                <div class="radio">
+                    <input type="radio" id="input_permissao_usuario_comum" name="permissao" value="comum">
+                    <label for="input_permissao_usuario_add">Comum</label>
                 </div>
-                <div class="checkbox">
-                    <input type="checkbox" id="input_permissao_usuario_add" name="permissao[]" value="usuario_add">
-                    
-                    <label for="input_permissao_usuario_add">Add usuário</label>
+
+                <div class="radio">
+                    <input type="radio" id="input_permissao_usuario_gerente" name="permissao" value="gerente">
+                    <label for="input_permissao_usuario_editar">Gerente</label>
                 </div>
-                <div class="checkbox">
-                    <input type="checkbox" id="input_permissao_usuario_editar" name="permissao[]" value="usuario_editar">
-                    
-                    <label for="input_permissao_usuario_editar">Editar usuário</label>
+
+                <div class="radio">
+                    <input type="radio" id="input_permissao_usuario_administrador" name="permissao" value="administrador">
+                    <label for="input_permissao_usuario_deletar">Administrador</label>
                 </div>
-                <div class="checkbox">
-                    <input type="checkbox" id="input_permissao_usuario_deletar" name="permissao[]" value="usuario_deletar">
-                    
-                    <label for="input_permissao_usuario_deletar">Deletar usuário</label>
-                </div>
+
             </div>
 
             <input class="button" type="submit" value="Salvar" />
