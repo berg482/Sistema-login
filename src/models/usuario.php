@@ -7,4 +7,5 @@ class usuario extends Model {
     public $nome;
     public $email;
     public $cpf;
+    public $permissao;
 }

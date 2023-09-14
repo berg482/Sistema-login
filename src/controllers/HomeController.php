@@ -9,21 +9,26 @@ use \src\handlers\LoginHandler;
 
 class HomeController extends Controller {
 
-    private $usuariologado; //receber usuario logado
+    public $usuariologado; //receber usuario logado
 
     public function __construct(){   //preencher usuariologado instancia de usuario
+        
         $this->usuariologado = LoginHandler::checkLogin();
-        var_dump($this->usuariologado);
         if($this->usuariologado === false){
             $this->redirect('/login');
         }
+        
     }
 
     public function index() {
         $usuarios = usuario::select()->execute(); //pegar todos usuarios 
         $this->render('home', [
-            'usuarios' => $usuarios //array usuarios mandando lista $usuarios para view
+            'usuarios' => $usuarios, //array usuarios mandando lista $usuarios para view
+            //'permissao' => $permissao
+            $this->usuariologado->permissao
+
         ]);
+        $this->usuariologado->permissao;
     }
 
     public function formulario(){
@@ -109,16 +114,23 @@ class HomeController extends Controller {
     public function permissaoeditar(){
 
     }
-
-    public function permissaoExcluirUsuario($args){
-        //$acesso = usuario::select('permissao')
-            //->where('id', $args['id'])->execute();
+    public function permissaoExcluirUsuario($args){ //trocar args/ usuario logado
+        //var_dump($args);
+        //exit;
+        $usuario = usuario::select('permissao')        //como selecionar exatamente um campo ??
+            ->where('id', $args)                //token usuario logado
+        ->execute();    
         
-        //if($acesso === 'administrador'){
-            //return true;
+        //if($usuario === 'administrador'){              // comparar o campo permissao do usuario logado com adm
+            //return true;sudo
         //}
-    //return false;
+        
     }
+
+    public function temPermissaoExcluir($args) {
+        return $this->permissaoExcluirUsuario(['id' => $args]);
+    }
+    
 
 }
 

@@ -1,4 +1,11 @@
-<php? use /src/controllers/HomeController; ?>
+<?php
+//namespace src\controllers;
+
+require_once __DIR__ . '/../../../vendor/autoload.php';
+use src\controllers\HomeController;
+
+$homeController = new HomeController();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,12 +34,17 @@
                     <th><?= $usuario['email']; ?></th>
                     <th><?= $usuario['cpf']; ?></th>
                     <td>
-                       
+                       <?php if($this->usuariologado->permissao == 'administrador' || $this->usuariologado->permissao == 'gerente'): ?>
                         <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/editar">
                             <img src="<?=$base;?>/assets/images/editar.svg" alt"" />
                         </a>
-
-                        <?php if (permissaoExcluirUsuario($usuario['id'])): ?>
+                        <?php endif;?>
+                        
+                        <?php
+                        
+                         //$acesso = $usuario['permissao'];
+                         //var_dump($acesso);
+                         if($this->usuariologado->permissao == 'administrador'): ?>  
                             <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/excluir" onclick="return confirm('Tem certeza que deseja excluir?')">
                                 <img src="<?=$base;?>/assets/images/deletar.svg" alt"" />
                             </a>
