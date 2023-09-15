@@ -34,7 +34,7 @@ $homeController = new HomeController();
                     <th><?= $usuario['email']; ?></th>
                     <th><?= $usuario['cpf']; ?></th>
                     <td>
-                       <?php if($this->usuariologado->permissao == 'administrador' || $this->usuariologado->permissao == 'gerente'): ?>
+                       <?php if($this->usuariologado->permissao != 'comum'): ?>
                         <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/editar">
                             <img src="<?=$base;?>/assets/images/editar.svg" alt"" />
                         </a>
@@ -54,6 +54,10 @@ $homeController = new HomeController();
             <?php endforeach; ?>
         </table>
     </section>
-    <a href="<?=$base?>/formulario">Criar usuário</a>
+
+    <?php if($this->usuariologado->permissao != 'comum'):?>
+        <a href="<?=$base?>/formulario">Criar usuário</a>   
+    <?php endif; ?>  
+
 </body>
 </html>
