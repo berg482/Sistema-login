@@ -77,21 +77,20 @@ $homeController = new HomeController();
         
     <?php endif; ?>
 
-    <button id="botaoSair">Sair</button>
-    
-  <script>
-    // jQuery está pronto para uso
-    $(document).ready(function () {
-      // Quando o botão for clicado, exiba um alerta
-      $("#botaoSair").click(function () {
-        alert("Botão clicado!");
-      });
-    });
-  </script>
+    <a href="<?=$base?>/login">
+                <button style="border: 0;
+                    padding: 10px 20px;
+                    background-color: #FF4500;
+                    border-radius: 10px;
+                    color: #FFF;
+                    font-size: 15px;
+                    margin-bottom: 10px;
+                    cursor: pointer;
+                    box-shadow: 0px 0px 3px #999;
+                    ">Sair
+                </button>
+    </a>
 
     
-
-    
-
 </body>
 </html>

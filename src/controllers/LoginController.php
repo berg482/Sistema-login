@@ -46,19 +46,19 @@ class LoginController extends Controller {
        }
     }
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"])) {
-        $action = $_POST["action"];
+    // if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"])) {
+    //     $action = $_POST["action"];
         
-        if ($action === "sair") {
+    //     if ($action === "sair") {
            
-            sair();
-        } elseif ($action === "logout") {
+    //         sair();
+    //     } elseif ($action === "logout") {
             
-            session_destroy();
-            header("Location: ../view/pages/login.php"); 
-            exit;
-        }
-    }
+    //         session_destroy();
+    //         header("Location: ../view/pages/login.php"); 
+    //         exit;
+    //     }
+    // }
 
     
     public function sair(){
