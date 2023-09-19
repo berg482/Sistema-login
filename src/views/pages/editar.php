@@ -26,24 +26,23 @@
             <input placeholder="Digite o CPF" class="input" type="text" name="cpf" value="<?=$usuario['cpf'];?>"  />
 
             <h2>Permissão</h2>
-            <div class="permissao">
+            
                 
-                <div class="radio">
+               
                     <input type="radio" id="input_permissao_usuario_comum" name="permissao" value="comum">
                     <label for="input_permissao_usuario_add">Comum</label>
-                </div>
-
-                <div class="radio">
+                
+                
                     <input type="radio" id="input_permissao_usuario_gerente" name="permissao" value="gerente">
                     <label for="input_permissao_usuario_editar">Gerente</label>
-                </div>
+                
 
-                <div class="radio">
+               
                     <input type="radio" id="input_permissao_usuario_administrador" name="permissao" value="administrador">
                     <label for="input_permissao_usuario_deletar">Administrador</label>
-                </div>
+                
 
-            </div>
+           
 
             <input class="button" type="submit" value="Salvar" />
             <a href="<?=$base;?>/" class="button">Sair</a>

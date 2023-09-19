@@ -3,6 +3,8 @@
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
 use src\controllers\HomeController;
+use \src\handlers\LoginController;
+
 
 $homeController = new HomeController();
 ?>
@@ -15,6 +17,9 @@ $homeController = new HomeController();
     <link rel="stylesheet" href="<?=$base;?>/assets/css/login.css" />
 </head>
 <body>
+<script  src="script.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <header>
         <div class="container">
             <a href=""><img src="<?=$base;?>/assets/images/logo.png" /></a>
@@ -56,8 +61,37 @@ $homeController = new HomeController();
     </section>
 
     <?php if($this->usuariologado->permissao != 'comum'):?>
-        <a href="<?=$base?>/formulario">Criar usuário</a>   
-    <?php endif; ?>  
+        <a href="<?=$base?>/formulario">
+            <button style="border: 0;
+                padding: 10px 20px;
+                background-color: #FF4500;
+                border-radius: 10px;
+                color: #FFF;
+                font-size: 15px;
+                margin-bottom: 10px;
+                cursor: pointer;
+                box-shadow: 0px 0px 3px #999;
+                ">Criar usuário
+            </button>
+        </a>
+        
+    <?php endif; ?>
+
+    <button id="botaoSair">Sair</button>
+    
+  <script>
+    // jQuery está pronto para uso
+    $(document).ready(function () {
+      // Quando o botão for clicado, exiba um alerta
+      $("#botaoSair").click(function () {
+        alert("Botão clicado!");
+      });
+    });
+  </script>
+
+    
+
+    
 
 </body>
 </html>

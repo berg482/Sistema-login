@@ -24,7 +24,7 @@ if(isset($_POST[('submit')]))
         <?php if(!empty($flash)): ?>
           <div class="flash"><?php echo $flash; ?></div>
         <?php endif; ?>
-        
+            <h1>Criar usuário</h1>
             <input placeholder="Digite o nome" class="input" type="text" name="nome" />
 
             <input placeholder="Digite o e-mail" class="input" type="email" name="email" />
@@ -54,7 +54,7 @@ if(isset($_POST[('submit')]))
             </div>
 
             <input class="button" type="submit" nome="submit" value="Salvar" />
-            <a href="<?=$base;?>/login" class="button">Sair</a>
+            <a href="<?=$base;?>/" class="button">Sair</a>
         </form>
     </section>
 </body>

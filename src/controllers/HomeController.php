@@ -110,28 +110,7 @@ class HomeController extends Controller {
         $this->redirect('/');
     }
 
-
-    public function permissaoeditar(){
-
-    }
-    public function permissaoExcluirUsuario($args){ //trocar args/ usuario logado
-        //var_dump($args);
-        //exit;
-        $usuario = usuario::select('permissao')        //como selecionar exatamente um campo ??
-            ->where('id', $args)                //token usuario logado
-        ->execute();    
-        
-        //if($usuario === 'administrador'){              // comparar o campo permissao do usuario logado com adm
-            //return true;sudo
-        //}
-        
-    }
-
-    public function temPermissaoExcluir($args) {
-        return $this->permissaoExcluirUsuario(['id' => $args]);
-    }
     
-
 }
 
 

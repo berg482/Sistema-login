@@ -18,6 +18,7 @@ class LoginController extends Controller {
             $flash = $_SESSION['flash']; //salva mensagem
             $_SESSION['flash'] = '';     // apagando da sessão
         }
+        $_SESSION['token'] = '';
         $this->render('login', [
             'flash' => $flash       //mostrando flash unica vez
         ]);//criar view login
@@ -29,12 +30,11 @@ class LoginController extends Controller {
        $password = filter_input(INPUT_POST, 'password' );
        //verificar dados
        if($email && $password){
-            $token = LoginHandler::verifyLogin($email, $password); // função verificar senha
-            var_dump($token);
+            $token = LoginHandler::verifyLogin($email, $password); //função verificar senha
+            
             if($token){
                 $_SESSION['token'] = $token;//armazenar token na sessao
-                //$this->redirect('/');//página inicial
-
+                //$this->redirect('/');     //página inicial
                 $this->redirect('/');
             }else{
                 $_SESSION['flash'] = 'email e/ou senha não conferem';
@@ -46,10 +46,26 @@ class LoginController extends Controller {
        }
     }
 
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"])) {
+        $action = $_POST["action"];
+        
+        if ($action === "sair") {
+           
+            sair();
+        } elseif ($action === "logout") {
+            
+            session_destroy();
+            header("Location: ../view/pages/login.php"); 
+            exit;
+        }
+    }
 
-   
-
-
+    
+    public function sair(){
+        $_SESSION['token'] = '';
+        $this->redirect('/login');
+    }
+    
 }
 
 
