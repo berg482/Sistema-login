@@ -55,6 +55,7 @@ if(isset($_POST[('submit')]))
 
             <input class="button" type="submit" nome="submit" value="Salvar" />
             <a href="<?=$base;?>/" class="button">Sair</a>
+            
         </form>
     </section>
 </body>

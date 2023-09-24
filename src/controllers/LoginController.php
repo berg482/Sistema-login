@@ -3,14 +3,10 @@ namespace src\controllers;
 
 use \core\Controller;
 use \src\handlers\LoginHandler;
-//ini_set("display_errors", 1);
-//include("file_with_errors.php");
+
 class LoginController extends Controller {
 
-    //public function __construct()
-    //{
-        
-    //}
+
 
     public function logar(){
         $flash = '';
@@ -18,7 +14,6 @@ class LoginController extends Controller {
             $flash = $_SESSION['flash']; //salva mensagem
             $_SESSION['flash'] = '';     // apagando da sessão
         }
-        $_SESSION['token'] = '';
         $this->render('login', [
             'flash' => $flash       //mostrando flash unica vez
         ]);//criar view login
@@ -46,21 +41,6 @@ class LoginController extends Controller {
        }
     }
 
-    // if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"])) {
-    //     $action = $_POST["action"];
-        
-    //     if ($action === "sair") {
-           
-    //         sair();
-    //     } elseif ($action === "logout") {
-            
-    //         session_destroy();
-    //         header("Location: ../view/pages/login.php"); 
-    //         exit;
-    //     }
-    // }
-
-    
     public function sair(){
         $_SESSION['token'] = '';
         $this->redirect('/login');

@@ -1,7 +1,7 @@
 <?php
 //namespace src\controllers;
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
+//require_once __DIR__ . '/../../../vendor/autoload.php';
 use src\controllers\HomeController;
 use \src\handlers\LoginController;
 
@@ -15,10 +15,9 @@ $homeController = new HomeController();
     <title>Login MKT</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
     <link rel="stylesheet" href="<?=$base;?>/assets/css/login.css" />
+    <script type="text/javascript" src="index.js"></script>
 </head>
 <body>
-<script  src="script.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <header>
         <div class="container">
@@ -39,16 +38,13 @@ $homeController = new HomeController();
                     <th><?= $usuario['email']; ?></th>
                     <th><?= $usuario['cpf']; ?></th>
                     <td>
-                       <?php if($this->usuariologado->permissao != 'comum'): ?>
-                        <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/editar">
-                            <img src="<?=$base;?>/assets/images/editar.svg" alt"" />
-                        </a>
+                        <?php if($this->usuariologado->permissao != 'comum'): ?>
+                            <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/editar">
+                                <img src="<?=$base;?>/assets/images/editar.svg" alt"" />
+                            </a>
                         <?php endif;?>
                         
                         <?php
-                        
-                         //$acesso = $usuario['permissao'];
-                         //var_dump($acesso);
                          if($this->usuariologado->permissao == 'administrador'): ?>  
                             <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/excluir" onclick="return confirm('Tem certeza que deseja excluir?')">
                                 <img src="<?=$base;?>/assets/images/deletar.svg" alt"" />
@@ -61,36 +57,14 @@ $homeController = new HomeController();
     </section>
 
     <?php if($this->usuariologado->permissao != 'comum'):?>
-        <a href="<?=$base?>/formulario">
-            <button style="border: 0;
-                padding: 10px 20px;
-                background-color: #FF4500;
-                border-radius: 10px;
-                color: #FFF;
-                font-size: 15px;
-                margin-bottom: 10px;
-                cursor: pointer;
-                box-shadow: 0px 0px 3px #999;
-                ">Criar usuário
-            </button>
-        </a>
-        
+        <div>
+            <a href="<?=$base?>/formulario" class="button">Criar usuário</a>
+        </div>
     <?php endif; ?>
-
-    <a href="<?=$base?>/login">
-                <button style="border: 0;
-                    padding: 10px 20px;
-                    background-color: #FF4500;
-                    border-radius: 10px;
-                    color: #FFF;
-                    font-size: 15px;
-                    margin-bottom: 10px;
-                    cursor: pointer;
-                    box-shadow: 0px 0px 3px #999;
-                    ">Sair
-                </button>
-    </a>
-
+        
+    <div>
+        <a href="<?=$base;?>/login" class="button">Voltar</a>
+    </div>
     
 </body>
 </html>
