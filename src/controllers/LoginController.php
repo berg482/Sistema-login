@@ -16,7 +16,7 @@ class LoginController extends Controller {
         }
         $this->render('login', [
             'flash' => $flash       //mostrando flash unica vez
-        ]);//criar view login
+        ]);
     }
 
     public function acaologar() {

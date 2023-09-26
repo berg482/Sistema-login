@@ -31,11 +31,18 @@ class IndexController extends Controller {
     }
 
     public function formulario(){
-        //se o usuario logado for diferente de comum renderize formulario
+        $flash = '';
+        if(!empty($_SESSION['flash'])){
+            $flash = $_SESSION['flash'];
+            $_SESSION['flash'] = '';
+        }
+
         if($this->usuariologado->permissao != 'comum'){
-        $this->render('formulario');
+        $this->render('formulario',[
+            'flash' => $flash
+        ]);
         }else{
-            echo 'Edição não autorizada';
+            echo 'Edição não autorizada devido a restrição na permissão de usuário';
         }
     }
 
@@ -57,7 +64,8 @@ class IndexController extends Controller {
                     $this->redirect('/formulario');
                 }            
         }else{
-            $this->redirect('/');
+            $_SESSION['flash'] = 'Preencha todos os campos e selecione uma permissão';
+            $this->redirect('/formulario');
         }
         
     }
