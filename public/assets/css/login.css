@@ -25,8 +25,11 @@ body {
     margin-bottom: 10px;
     cursor: pointer;
     box-shadow: 0px 0px 3px #999;
+    text-decoration: none
 }
-
+.button:hover {
+    background-color:#477dbb;
+}
 .container {
     max-width:1040px;
     margin:auto;
@@ -104,15 +107,4 @@ form a {
     color: white;
     padding: 10px;
     margin-bottom: 20px;
-}
-.button {
-    border:0;
-    padding:10px 20px;
-    background-color:#FF4500;
-    border-radius:10px;
-    color:#FFF;
-    font-size:15px;
-    margin-bottom:10px;
-    cursor:pointer;
-    box-shadow:0px 0px 3px #999;
 }

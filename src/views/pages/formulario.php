@@ -1,9 +1,3 @@
-<?php
-if(isset($_POST[('submit')]))
-{ //se existir variavel
-    print_r('Permissão: '.$_POST['permissao']);
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +48,7 @@ if(isset($_POST[('submit')]))
             </div>
 
             <input class="button" type="submit" nome="submit" value="Salvar" />
-            <a href="<?=$base;?>/" class="button">Sair</a>
+            <a href="<?=$base;?>/" class="button">Voltar</a>
             
         </form>
     </section>

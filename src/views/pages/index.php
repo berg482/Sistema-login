@@ -2,11 +2,11 @@
 //namespace src\controllers;
 
 //require_once __DIR__ . '/../../../vendor/autoload.php';
-use src\controllers\HomeController;
+use src\controllers\IndexController;
 use \src\handlers\LoginController;
 
 
-$homeController = new HomeController();
+$IndexController = new IndexController();
 ?>
 <!DOCTYPE html>
 <html>

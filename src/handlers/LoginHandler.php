@@ -19,15 +19,14 @@ class LoginHandler {// classe especifica para verificar login
             }else{
                 $cont = 0;
             }
-            //var_dump($cont);
             if($cont > 0){
 
                 $usuariologado = new usuario();//instancia, montando classe de usuário
                 if (isset($data[0]['permissao'])) {
                     $usuariologado->permissao = $data[0]['permissao'];
                 }
-                //$usuariologado->email = data['email'];
-                return $usuariologado; //true;
+               
+                return $usuariologado;
             }
 
         }

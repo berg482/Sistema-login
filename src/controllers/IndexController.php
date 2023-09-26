@@ -2,12 +2,12 @@
 namespace src\controllers;
 
 use \src\models\usuario;
-use \core\Controller; //liberar uso 
+use \core\Controller;
 use \src\handlers\LoginHandler;
 
 //use src\handlers\LoginHandler as HandlersLoginHandler;
 
-class HomeController extends Controller {
+class IndexController extends Controller {
 
     public $usuariologado; //receber usuario logado
 
@@ -22,17 +22,21 @@ class HomeController extends Controller {
 
     public function index() {
         $usuarios = usuario::select()->execute(); //pegar todos usuarios 
-        $this->render('home', [
+        $this->render('index', [
             'usuarios' => $usuarios, //array usuarios mandando lista $usuarios para view
             //'permissao' => $permissao
             $this->usuariologado->permissao
-
         ]);
         $this->usuariologado->permissao;
     }
 
     public function formulario(){
+        //se o usuario logado for diferente de comum renderize formulario
+        if($this->usuariologado->permissao != 'comum'){
         $this->render('formulario');
+        }else{
+            echo 'Edição não autorizada';
+        }
     }
 
     public function acaoformulario(){
@@ -44,29 +48,14 @@ class HomeController extends Controller {
 
         if($nome && $email && $senha && $cpf && $permissao ){
 
-            //$data = usuario::select()->where('email', $email)->execute();
-            
-            //if(count($data) === 0){ //se não existir
-                //usuario::insert([
-                    //'nome' => $nome,
-                    //'email' => $email,
-                    //'senha' => $senha,
-                    //'cpf' => $cpf
-                //])->execute();
-                //$this->redirect('/');
+            if(LoginHandler::existeEmail($email) === false){
 
-                if(LoginHandler::existeEmail($email) === false){
-
-                    LoginHandler::adicionarUsuario($nome, $email, $senha, $cpf, $permissao );
-                    //$_SESSION['token'] = $token;
+                LoginHandler::adicionarUsuario($nome, $email, $senha, $cpf, $permissao );
                     $this->redirect('/');
                 }else{
                     $_SESSION['flash'] = 'E-mail já cadastrado';
                     $this->redirect('/formulario');
-                }
-
-            //}
-            
+                }            
         }else{
             $this->redirect('/');
         }

@@ -28,8 +28,7 @@ class LoginController extends Controller {
             $token = LoginHandler::verifyLogin($email, $password); //função verificar senha
             
             if($token){
-                $_SESSION['token'] = $token;//armazenar token na sessao
-                //$this->redirect('/');     //página inicial
+                $_SESSION['token'] = $token;
                 $this->redirect('/');
             }else{
                 $_SESSION['flash'] = 'email e/ou senha não conferem';
