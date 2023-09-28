@@ -37,7 +37,7 @@ $IndexController = new IndexController();
                     <th><?= $usuario['nome']; ?></th>
                     <th><?= $usuario['email']; ?></th>
                     <th><?= $usuario['cpf']; ?></th>
-                    <td>
+                    <td class="cell">
                         <?php if($this->usuariologado->permissao != 'comum'): ?>
                             <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/editar">
                                 <img src="<?=$base;?>/assets/images/editar.svg" alt"" />

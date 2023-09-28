@@ -18,16 +18,16 @@
         <?php if(!empty($flash)): ?>
           <div class="flash"><?php echo $flash; ?></div>
         <?php endif; ?>
-            <h1>Criar usuário</h1>
+            <h1 class="title">Criar usuário</h1>
             <input placeholder="Digite o nome" class="input" type="text" name="nome" />
 
             <input placeholder="Digite o e-mail" class="input" type="email" name="email" />
 
-            <input placeholder="Digite o CPF" class="input" type="text" name="cpf" />
+            <input placeholder="Digite o CPF" class="input" type="text" name="cpf" pattern="[0-9]{11}" maxlength="11" />
 
             <input placeholder="Digite a senha" class="input" type="password" name="senha" />
 
-            <h2>Permissão</h2>
+            <h2 class="title">Permissão</h2>
             <div class="permissao">
                
                 <div class="radio">

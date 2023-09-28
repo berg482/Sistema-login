@@ -42,7 +42,7 @@ class IndexController extends Controller {
             'flash' => $flash
         ]);
         }else{
-            echo 'Edição não autorizada devido a restrição na permissão de usuário';
+            echo 'Criação de usuários não autorizada';
         }
     }
 
@@ -71,11 +71,21 @@ class IndexController extends Controller {
     }
 
     public function editar($args){
-        $usuario = usuario::select()->find($args['id']);
+        $flash = '';
+        if(!empty($_SESSION['flash'])){
+            $flash = $_SESSION['flash'];
+            $_SESSION['flash'] = '';
+        }
+        if($this->usuariologado->permissao != 'comum'){
+            $usuario = usuario::select()->find($args['id']);
+            $this->render('editar',[
+                'usuario' => $usuario,
+                'flash' => $flash
+            ]);
+        }else{
+            echo 'Edição não autorizada';
+        }
         
-        $this->render('editar',[
-            'usuario' => $usuario
-        ]);
     }
 
     public function acaoeditar($args){
@@ -84,6 +94,7 @@ class IndexController extends Controller {
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $cpf = filter_input(INPUT_POST, 'cpf' );
         $permissao = filter_input(INPUT_POST, 'permissao');
+        
 
         if($nome && $email && $cpf && $permissao){
             //requisição
@@ -102,9 +113,13 @@ class IndexController extends Controller {
     }
 
     public function excluir($args){
-        usuario::delete()
+        if($this->usuariologado->permissao != 'comum'){
+            usuario::delete()
             ->where('id', $args['id'])->execute();
-        $this->redirect('/');
+            $this->redirect('/');
+        }else{
+            $this->redirect('/');
+        }
     }
 
     

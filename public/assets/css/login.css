@@ -12,6 +12,18 @@ body {
     margin:0;
     padding-bottom:50px;
 }
+.title{
+    font-family: 'Your Chosen Font', sans-serif; 
+    font-size: 24px; 
+    color: #333; 
+    text-align: left; 
+    margin-bottom: 20px; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+}
+.cell{
+    text-align: center;
+    vertical-align: middle;
+}
 .button {
     margin: 10px auto 0;
     display: block;
@@ -29,6 +41,34 @@ body {
 }
 .button:hover {
     background-color:#477dbb;
+}
+.radio {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.radio input[type="radio"] {
+    margin-right: 10px; 
+    appearance: none; 
+    width: 20px; 
+    height: 20px; 
+    border: 2px solid #333; 
+    border-radius: 50%; 
+    outline: none; 
+    cursor: pointer;
+}
+.radio input[type="radio"]:checked {
+    background-color: #FF4500; 
+    border-color: #FF4500; 
+}
+
+.radio label {
+    font-size: 16px; /* Tamanho do texto */
+    color: #333; /* Cor do texto */
+    cursor: pointer;
+}
+.radio label:hover {
+    text-decoration: underline; 
 }
 .container {
     max-width:1040px;
