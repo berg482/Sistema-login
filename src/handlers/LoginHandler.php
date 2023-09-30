@@ -38,8 +38,11 @@ class LoginHandler {// classe especifica para verificar login
         
         if($user){
             if(password_verify($password, $user['senha'])){ //função verificar senha com hash
-                $token = md5(time().rand(0,9999999)); //gerar token
-                
+
+                $token = md5(time().rand(0,9999999).time()); //gerar token
+                //$tokenLengh = 32;
+                //$token = bin2hex(random_bytes($tokenLengh));
+        
                 usuario::update()//update             //Alterar no usuario, salvar token
                     ->set('token', $token)
                     ->where('email', $email)

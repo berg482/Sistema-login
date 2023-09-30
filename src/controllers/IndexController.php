@@ -97,7 +97,6 @@ class IndexController extends Controller {
         
 
         if($nome && $email && $cpf && $permissao){
-            //requisição
             usuario::update()
                 ->set('nome', $nome)
                 ->set('email', $email)
@@ -107,6 +106,9 @@ class IndexController extends Controller {
             ->execute();
             
             $this->redirect('/');
+        }else{
+            $_SESSION['flash'] = 'Preencha todos os campos e escolha uma permissão';
+            $this->redirect('/usuario/'.$args['id'].'/editar');
         }
 
         $this->redirect('/usuario/'.$args['id'].'/editar');
