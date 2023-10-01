@@ -58,7 +58,7 @@ $IndexController = new IndexController();
 
     <?php if($this->usuariologado->permissao != 'comum'):?>
         <div>
-            <a href="<?=$base?>/formulario" class="button">Criar usuário</a>
+            <a href="<?=$base?>/criar" class="button">Criar usuário</a>
         </div>
     <?php endif; ?>
         

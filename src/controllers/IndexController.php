@@ -30,7 +30,7 @@ class IndexController extends Controller {
         $this->usuariologado->permissao;
     }
 
-    public function formulario(){
+    public function criar(){
         $flash = '';
         if(!empty($_SESSION['flash'])){
             $flash = $_SESSION['flash'];
@@ -38,7 +38,7 @@ class IndexController extends Controller {
         }
 
         if($this->usuariologado->permissao != 'comum'){
-        $this->render('formulario',[
+        $this->render('criar',[
             'flash' => $flash
         ]);
         }else{
@@ -46,7 +46,7 @@ class IndexController extends Controller {
         }
     }
 
-    public function acaoformulario(){
+    public function acaocriar(){
         $nome = filter_input(INPUT_POST, 'nome');
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $senha = filter_input(INPUT_POST, 'senha' );
@@ -61,11 +61,11 @@ class IndexController extends Controller {
                     $this->redirect('/');
                 }else{
                     $_SESSION['flash'] = 'E-mail já cadastrado';
-                    $this->redirect('/formulario');
+                    $this->redirect('/criar');
                 }            
         }else{
             $_SESSION['flash'] = 'Preencha todos os campos e selecione uma permissão';
-            $this->redirect('/formulario');
+            $this->redirect('/criar');
         }
         
     }
