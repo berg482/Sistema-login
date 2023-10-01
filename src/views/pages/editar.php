@@ -23,9 +23,10 @@
 
             <input placeholder="Digite o e-mail" class="input" type="email" name="email" value="<?=$usuario['email'];?>"  />
 
-            <input placeholder="Digite o CPF" class="input" type="text" name="cpf" value="<?=$usuario['cpf'];?>"  />
+            <input placeholder="Digite o CPF" class="input" type="text" name="cpf" value="<?=$usuario['cpf'];?>" pattern="[0-9]{11}" maxlength="11"  />
 
             <h2 class="title">Permissão</h2>
+                
                 <div class="radio">
                     <input type="radio" id="input_permissao_usuario_comum" name="permissao" value="comum">
                     <label for="input_permissao_usuario_add">Comum</label>

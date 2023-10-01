@@ -94,18 +94,24 @@ class IndexController extends Controller {
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $cpf = filter_input(INPUT_POST, 'cpf' );
         $permissao = filter_input(INPUT_POST, 'permissao');
-        
+        $usuarioEdicao = usuario::select()->find($args['id']);
 
-        if($nome && $email && $cpf && $permissao){
-            usuario::update()
+        if($nome && $email && $cpf && $permissao ){
+            
+            if($email !== $usuarioEdicao['email'] && LoginHandler::existeEmail($email)){
+                $_SESSION['flash'] = 'E-mail já cadastrado';
+                $this->redirect('/usuario/'.$args['id'].'/editar');
+            }
+                usuario::update()
                 ->set('nome', $nome)
                 ->set('email', $email)
                 ->set('cpf', $cpf)
                 ->set('permissao', $permissao)
                 ->where('id', $args['id'])
-            ->execute();
+                ->execute();
+
+                $this->redirect('/');
             
-            $this->redirect('/');
         }else{
             $_SESSION['flash'] = 'Preencha todos os campos e escolha uma permissão';
             $this->redirect('/usuario/'.$args['id'].'/editar');

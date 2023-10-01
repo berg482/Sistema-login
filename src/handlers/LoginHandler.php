@@ -11,9 +11,11 @@ class LoginHandler {// classe especifica para verificar login
         if(!empty($_SESSION['token'])){//se existir e não estiver vazia
 
             $token = $_SESSION['token']; //pegar token
-            //var_dump($token);
+            
             $data = usuario::select()->where('token', $token)->execute();//verificação
-            var_dump($data);
+            //echo '<pre>';
+            //highlight_string("<?php\n" . var_export($data, true));
+            //echo '</pre>';
             if(is_array($data)){
                 $cont = count($data);
             }else{
@@ -24,6 +26,7 @@ class LoginHandler {// classe especifica para verificar login
                 $usuariologado = new usuario();//instancia, montando classe de usuário
                 if (isset($data[0]['permissao'])) {
                     $usuariologado->permissao = $data[0]['permissao'];
+                    $usuariologado->email = $data[0]['email'];
                 }
                
                 return $usuariologado;
