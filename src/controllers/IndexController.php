@@ -89,7 +89,7 @@ class IndexController extends Controller {
     }
 
     public function acaoeditar($args){
-
+        
         $nome = filter_input(INPUT_POST, 'nome');
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
         $cpf = filter_input(INPUT_POST, 'cpf' );

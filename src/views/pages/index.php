@@ -34,8 +34,8 @@ $IndexController = new IndexController();
             </tr>
             <?php foreach($usuarios as $usuario): ?>
                 <tr>
-                    <th><?= $usuario['nome']; ?></th>
-                    <th><?= $usuario['email']; ?></th>
+                    <th><?= htmlspecialchars($usuario['nome']); ?></th>
+                    <th><?= htmlspecialchars($usuario['email']); ?></th>
                     <th><?= $usuario['cpf']; ?></th>
                     <td class="cell">
                         <?php if($this->usuariologado->permissao != 'comum'): ?>
