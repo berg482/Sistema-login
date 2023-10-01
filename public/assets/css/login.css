@@ -24,6 +24,13 @@ body {
     text-align: center;
     vertical-align: middle;
 }
+.cell a {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 18px;
+    text-decoration: none; 
+}
+
 .button {
     margin: 10px auto 0;
     display: block;
@@ -63,8 +70,8 @@ body {
 }
 
 .radio label {
-    font-size: 16px; /* Tamanho do texto */
-    color: #333; /* Cor do texto */
+    font-size: 16px;
+    color: #333; 
     cursor: pointer;
 }
 .radio label:hover {
