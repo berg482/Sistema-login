@@ -23,7 +23,7 @@
 
             <input placeholder="Digite o e-mail" class="input" type="email" name="email" value="<?=$usuario['email'];?>"  />
 
-            <input placeholder="Digite o CPF" class="input" type="text" name="cpf" value="<?=$usuario['cpf'];?>" pattern="[0-9]{11}" maxlength="11"  />
+            <input placeholder="Digite o CPF" class="input" type="text" name="cpf" value="<?= str_pad($usuario['cpf'], 11, '0', STR_PAD_LEFT); ?>" pattern="[0-9]{11}" maxlength="11"  />
 
             <h2 class="title">Permissão</h2>
                 
@@ -40,7 +40,7 @@
                     <label for="input_permissao_usuario_deletar">Administrador</label>
                 </div>
             <input class="button" type="submit" value="Salvar" />
-            <a href="<?=$base;?>/" class="button">Sair</a>
+            <a href="<?=$base;?>/" class="button">Voltar</a>
         </form>
     </section>
 </body>

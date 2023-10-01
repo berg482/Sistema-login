@@ -36,7 +36,7 @@ $IndexController = new IndexController();
                 <tr>
                     <th><?= htmlspecialchars($usuario['nome']); ?></th>
                     <th><?= htmlspecialchars($usuario['email']); ?></th>
-                    <th><?= $usuario['cpf']; ?></th>
+                    <th><?= str_pad($usuario['cpf'], 11, '0', STR_PAD_LEFT); ?></th>
                     <td class="cell">
                         <?php if($this->usuariologado->permissao != 'comum'): ?>
                             <a href="<?=$base?>/usuario/<?=$usuario['id']; ?>/editar">
