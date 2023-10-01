@@ -70,6 +70,25 @@ body {
 .radio label:hover {
     text-decoration: underline; 
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #000; /* Bordas pretas */
+    color: #000; /* Letras pretas */
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+
 .container {
     max-width:1040px;
     margin:auto;
