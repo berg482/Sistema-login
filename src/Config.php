@@ -2,7 +2,7 @@
 namespace src;
 
 class Config {
-    const BASE_DIR = '/mvc/public';
+    const BASE_DIR = '/Sistema-login/public';
 
     const DB_DRIVER = 'mysql';
     const DB_HOST = 'localhost';
@@ -12,4 +12,5 @@ class Config {
 
     const ERROR_CONTROLLER = 'ErrorController';
     const DEFAULT_ACTION = 'index';
+    
 }
