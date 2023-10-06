@@ -5,13 +5,13 @@ use \src\models\usuario;
 use \core\Controller;
 use \src\handlers\LoginHandler;
 
-//use src\handlers\LoginHandler as HandlersLoginHandler;
+
 
 class IndexController extends Controller {
 
-    public $usuariologado; //receber usuario logado
+    public $usuariologado; 
 
-    public function __construct(){   //preencher usuariologado instancia de usuario
+    public function __construct(){ 
         
         $this->usuariologado = LoginHandler::checkLogin();
         if($this->usuariologado === false){
@@ -21,13 +21,15 @@ class IndexController extends Controller {
     }
 
     public function index() {
-        $usuarios = usuario::select()->execute(); //pegar todos usuarios 
+        //$usuarios = usuario::select()->execute();
+        $usuariosModel = new usuario;
+        $offset = 0;
+        $limite = 3;  
+        $usuarios = $usuariosModel->pegarLista($offset, $limite); 
         $this->render('index', [
-            'usuarios' => $usuarios, //array usuarios mandando lista $usuarios para view
-            //'permissao' => $permissao
+            'usuarios' => $usuarios, 
             $this->usuariologado->permissao
         ]);
-        $this->usuariologado->permissao;
     }
 
     public function criar(){

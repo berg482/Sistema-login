@@ -8,4 +8,10 @@ class usuario extends Model {
     public $email;
     public $cpf;
     public $permissao;
+
+    
+    public function pegarLista($offset, $limite){
+        $usuarios = usuario::select()->limit(2)->execute();
+        return $usuarios;
+    }
 }
