@@ -21,14 +21,28 @@ class IndexController extends Controller {
     }
 
     public function index() {
-        //$usuarios = usuario::select()->execute();
         $usuariosModel = new usuario;
+
         $offset = 0;
-        $limite = 3;  
-        $usuarios = $usuariosModel->pegarLista($offset, $limite); 
+        $limite = 2;
+
+        $totalUsuariosArray = $usuariosModel->pegarTotalUsuarios();
+        $totalUsuarios = $totalUsuariosArray[0]['count(`nome`)'];
+ 
+        $numeroPaginas = ceil($totalUsuarios/$limite);
+        $paginaAtual = 1;
+
+        if(!empty($_GET['p'])){
+            $paginaAtual = $_GET['p'];
+        }
+
+        $offset = ($paginaAtual*$limite) - $limite;
+        $usuarios = $usuariosModel->pegarListaUsuario($offset, $limite);
+        
         $this->render('index', [
             'usuarios' => $usuarios, 
-            $this->usuariologado->permissao
+            'paginas' => $numeroPaginas,
+            'permissao' => $this->usuariologado->permissao
         ]);
     }
 

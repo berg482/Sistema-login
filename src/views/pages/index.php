@@ -2,6 +2,8 @@
 //namespace src\controllers;
 
 //require_once __DIR__ . '/../../../vendor/autoload.php';
+
+use ClanCats\Hydrahon\Query\Sql\Base;
 use src\controllers\IndexController;
 use \src\handlers\LoginController;
 
@@ -54,6 +56,11 @@ $IndexController = new IndexController();
                 </tr>
             <?php endforeach; ?>
         </table>
+
+        <?php for($q=1;$q<=$paginas;$q++): ?>
+            <a href="<?php echo $base;?>?p=<?php echo $q;?>"> <?=$q;?> </a>
+        <?php endfor;?>
+
     </section>
 
     <?php if($this->usuariologado->permissao != 'comum'):?>
