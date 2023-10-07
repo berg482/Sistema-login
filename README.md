@@ -1,3 +1,6 @@
+Documentação Hidrahon construtor de consultas SQL
+https://github.com/ClanCats/Hydrahon
+
 ## Instalação
 Você pode clonar este repositório OU baixar o .zip
 
