@@ -20,6 +20,11 @@ class IndexController extends Controller {
         
     }
 
+    /**
+     * [index description]
+     *
+     * @return  [type]  [return description]
+     */
     public function index() {
         $usuariosModel = new usuario;
 
@@ -45,7 +50,13 @@ class IndexController extends Controller {
             'permissao' => $this->usuariologado->permissao
         ]);
     }
-
+    
+    /**
+     * Método de criação de usuários condicionado a permissão
+     * de administrador e gerente ser existente, exibe flash na view se
+     * condição não for atendida
+     * @return  void
+     */
     public function criar(){
         $flash = '';
         if(!empty($_SESSION['flash'])){
@@ -86,6 +97,13 @@ class IndexController extends Controller {
         
     }
 
+    /**
+     * Método responsável por enviar para a view de edição informações
+     * do usuário selecionado para edição,também bloquea acesso a rota
+     * de edição por usuário logado com permissão comum e envia flash para view 
+     * @param   int  $args 
+     * @return  void 
+     */
     public function editar($args){
         $flash = '';
         if(!empty($_SESSION['flash'])){
@@ -101,7 +119,6 @@ class IndexController extends Controller {
         }else{
             echo 'Edição não autorizada';
         }
-        
     }
 
     public function acaoeditar($args){
@@ -113,40 +130,41 @@ class IndexController extends Controller {
         $usuarioEdicao = usuario::select()->find($args['id']);
 
         if($nome && $email && $cpf && $permissao ){
-            
+            //Possibilita editar o próprio usuário logado sem editar o email
             if($email !== $usuarioEdicao['email'] && LoginHandler::existeEmail($email)){
                 $_SESSION['flash'] = 'E-mail já cadastrado';
                 $this->redirect('/usuario/'.$args['id'].'/editar');
             }
                 usuario::update()
-                ->set('nome', $nome)
-                ->set('email', $email)
-                ->set('cpf', $cpf)
-                ->set('permissao', $permissao)
-                ->where('id', $args['id'])
+                    ->set('nome', $nome)
+                    ->set('email', $email)
+                    ->set('cpf', $cpf)
+                    ->set('permissao', $permissao)
+                    ->where('id', $args['id'])
                 ->execute();
 
                 $this->redirect('/');
-            
         }else{
             $_SESSION['flash'] = 'Preencha todos os campos e escolha uma permissão';
             $this->redirect('/usuario/'.$args['id'].'/editar');
         }
-
         $this->redirect('/usuario/'.$args['id'].'/editar');
     }
 
+    /**
+     * Método de exclusão de usuários de acordo com a permissão
+     * Somente para usuário administrador 
+     * @param   int  $args
+     * @return  void
+     */
     public function excluir($args){
-        if($this->usuariologado->permissao != 'comum'){
+        if($this->usuariologado->permissao = 'administrador'){
             usuario::delete()
-            ->where('id', $args['id'])->execute();
-            $this->redirect('/');
-        }else{
-            $this->redirect('/');
+            ->where('id', $args['id'])->execute();  
         }
+        $this->redirect('/');
     }
 
-    
 }
 
 

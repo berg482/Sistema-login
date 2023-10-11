@@ -24,6 +24,17 @@ class LoginHandler {
         }
     }
 
+    /**
+     * Função de verificação de login, verifica se existe email no banco de dados
+     * e atravez da funçao password_verify compara a senha digitada com hash no banco
+     * após todas as verificações cria um token para o usuário e registra no banco
+     *
+     * @param   varchar  $email     
+     * @param   string  $password  
+     *
+     * @return  $token  Retorno do token condicionado a verificação de senha
+     * @return  false   Retorno falso quando usuário não for encontrado usando email             
+     */
     public static function verifyLogin($email, $password){
         $user = usuario::select()->where('email', $email)->one(); 
         if($user){
@@ -33,17 +44,35 @@ class LoginHandler {
                     ->set('token', $token)
                     ->where('email', $email)
                     ->execute();
-                return $token; 
+                return $token;
             }
         }
         return false;
     }
 
+    /**
+     * Método que verifica se existe email já cadastrado no banco de
+     * dados, evitando duplicação de email 
+     * @param string $email
+     * @return bool $existeEmail
+     */
     public static function existeEmail($email){
-        $user = usuario::select()->where('email', $email)->one();
-        return $user ? true : false; 
+        $existeEmail = usuario::select()->where('email', $email)->one();
+        return $existeEmail ? true : false;
     }
 
+    /**
+     * Método que adiciona usuários no banco de dados e senha como hash recebendo 
+     * nome, email, senha, cpf, permissao como parâmetros
+     *  
+     * @param   int      $nome       
+     * @param   varchar  $email      
+     * @param   string     $senha      
+     * @param   bigint   $cpf        
+     * @param   text     $permissao  
+     *
+     * @return  void     
+     */
     public static function adicionarUsuario($nome, $email, $senha, $cpf, $permissao){
         $hash = password_hash($senha, PASSWORD_DEFAULT);
         usuario::insert([

@@ -58,7 +58,7 @@ $IndexController = new IndexController();
         </table>
 
         <?php for($q=1;$q<=$paginas;$q++): ?>
-            <a href="<?php echo $base;?>?p=<?php echo $q;?>"> <?=$q;?> </a>
+            <a href="<?php echo $base;?>?p=<?php echo $q;?>"class="pagination-link"> <?=$q;?> </a>
         <?php endfor;?>
 
     </section>

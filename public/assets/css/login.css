@@ -175,3 +175,22 @@ form a {
     padding: 10px;
     margin-bottom: 20px;
 }
+
+.pagination-link {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+    background-color: #fff;
+}
+
+.pagination-link:hover {
+    background-color: #FF4500;
+    color: #fff;
+}
+
+
+
