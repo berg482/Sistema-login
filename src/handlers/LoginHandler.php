@@ -8,21 +8,42 @@ ini_set("display_errors", 1);
 class LoginHandler {
 
     public static function checkLogin(){
-        if(!empty($_SESSION['token'])){
-            if (!empty($_SESSION['token'])) {
-                $token = $_SESSION['token'];
-                $data = usuario::select()->where('token', $token)->execute();
-        
-                if ($data && isset($data[0]['permissao'], $data[0]['email'])) {
-                    $usuariologado = new usuario();
+        if(!empty($_SESSION['token'])){//se existir e não estiver vazia
+            $token = $_SESSION['token'];
+            $data = usuario::select()->where('token', $token)->execute();//verificação
+            if(is_array($data)){
+                $cont = count($data);
+            }else{
+                $cont = 0;
+            }
+            if($cont > 0){
+
+                $usuariologado = new usuario();//instancia, montando classe de usuário
+                if (isset($data[0]['permissao'])) {
                     $usuariologado->permissao = $data[0]['permissao'];
                     $usuariologado->email = $data[0]['email'];
-                    return $usuariologado;
                 }
+                return $usuariologado;
             }
-            return false;
+
         }
+        return false;
     }
+        // if(!empty($_SESSION['token'])){
+        //     if (!empty($_SESSION['token'])) {
+        //         $token = $_SESSION['token'];
+        //         $data = usuario::select()->where('token', $token)->execute();
+        
+        //         if ($data && isset($data[0]['permissao'], $data[0]['email'])) {
+        //             $usuariologado = new usuario();
+        //             $usuariologado->permissao = $data[0]['permissao'];
+        //             $usuariologado->email = $data[0]['email'];
+        //             return $usuariologado;
+        //         }
+        //     }
+        //     return false;
+        // } 
+
 
     /**
      * Função de verificação de login, verifica se existe email no banco de dados
@@ -65,7 +86,7 @@ class LoginHandler {
      * Método que adiciona usuários no banco de dados e senha como hash recebendo 
      * nome, email, senha, cpf, permissao como parâmetros
      *  
-     * @param   int      $nome       
+     * @param   int      $nome         
      * @param   varchar  $email      
      * @param   string     $senha      
      * @param   bigint   $cpf        

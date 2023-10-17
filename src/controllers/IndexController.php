@@ -158,7 +158,8 @@ class IndexController extends Controller {
      * @return  void
      */
     public function excluir($args){
-        if($this->usuariologado->permissao = 'administrador'){
+        var_dump($this->usuariologado->permissao);
+        if($this->usuariologado->permissao != 'comum'){
             usuario::delete()
             ->where('id', $args['id'])->execute();  
         }
